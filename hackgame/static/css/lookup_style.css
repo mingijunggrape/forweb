@@ -1,0 +1,80 @@
+.lookup_main {
+  width: 861px;
+  margin-top: 50px;
+  border: solid 2px;
+  border-color: #f2f2f2;
+  border-radius: 12px;
+  padding: 29px;
+}
+.lookup_info {
+  display: flex;
+  align-items: center;
+}
+
+.lookup_info img {
+  margin-right: 15px;
+}
+
+.lookup_name {
+  display: flex;
+}
+.lookup_name a {
+  margin-left: 8px;
+  margin-right: 8px;
+  border-radius: 6px;
+  background: #eff0f2;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 21px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration-line: none;
+}
+
+.lookup_title {
+  padding-bottom: 15px;
+  border-bottom: solid 1px #eff0f2;
+}
+
+.lookup_content {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+.lookup_content_bottom {
+  padding-bottom: 15px;
+  border-bottom: solid 1px #eff0f2;
+}
+.lookup_content_bottom a span {
+  font-weight: 700;
+}
+.love_comment {
+  margin-top: 25px;
+  line-height: 22px;
+}
+.love_comment span {
+  margin-left: 5px;
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.comment {
+  margin-top: 15px;
+  border: solid 2px #eff0f2;
+  padding: 18px;
+  border-radius: 15px;
+}
+
+.comment_input textarea {
+  width: 800px;
+  border: 0px;
+  resize: none;
+  font-size: 18px;
+}
+
+.comment_input input {
+  border: 0px;
+  height: 30px;
+  width: 50px;
+  background-color: rgb(3, 199, 90, 0.12);
+  color: #009f47;
+}

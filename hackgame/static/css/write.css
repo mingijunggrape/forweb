@@ -1,0 +1,100 @@
+input {
+  padding: 0;
+}
+.write_main {
+  width: 1080px;
+  border-top: 2px solid black;
+  padding-top: 20px;
+  display: flex;
+}
+
+.write_boart_frist {
+  width: 862px;
+}
+
+.write_boart_frist div:nth-child(1) {
+  display: flex;
+}
+
+.write_boart_frist div select {
+  width: 630px;
+  height: 45px;
+  border: 1px solid #ebecef;
+}
+
+.write_boart_frist div input {
+  width: 220px;
+  height: 45px;
+  margin-left: 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 0px;
+  color: #009f47;
+  background-color: rgb(3, 199, 90, 0.12);
+}
+
+.write_title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 852px;
+  padding-left: 10px;
+  height: 45px;
+  border: 1px solid #ebecef;
+  font-size: 18px;
+}
+
+.write_area_top {
+  width: 848px;
+  height: 60px;
+  background: #fbfbfb;
+  list-style: none;
+  border-bottom: 1px solid #ebecef;
+  padding: 0px;
+  display: flex;
+  padding: 5px 7px 5px 7px;
+  align-items: center;
+}
+.write_area_top li span {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.write_area_top li span svg {
+  display: block;
+}
+.write_area_top li button:nth-child(n) {
+  width: 60px;
+  height: 50px;
+  margin-left: 15px;
+  border: 0px;
+  background: #fbfbfb;
+}
+
+.write_content {
+  width: 812px;
+  height: 480px;
+  padding: 25px;
+  border: 1px solid #ebecef;
+}
+
+.write_content textarea {
+  border: 0px;
+  resize: none;
+  width: 812px;
+  padding: 0px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.write_advertise1 {
+  width: 862px;
+  height: 200px;
+  background-color: aquamarine;
+}
+
+.write_advertise2 {
+  width: 322px;
+  height: 300px;
+  background-color: antiquewhite;
+  margin-left: 25px;
+}

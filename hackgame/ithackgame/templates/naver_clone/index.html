@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="bigBody">
+        <div class="header">
+            <div class="header_first_child"> 
+                <div>치트엔진 대피소
+                </div>
+                <div>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">로그아웃</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">로그인</a>
+                    <span>|</span>
+                    <a href="{% url 'sign' %}">회원가입</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header_second_child"> 
+                <img class="header_img" src="{% static 'img/1.png' %}" alt="">
+            </div>
+        </div>
+        <div class="sideAndMain">
+            <div class="sideBar">
+                <div class="sideBar_first">
+                    <div><span><a href="{% url 'ItisNotice' %}">카페정보</a></span></div>
+                    {% if user.is_authenticated %}
+                    <div><span><a href="{% url 'docterlist' name=request.user.username %}">나의활동</a></span></div>
+                    {% else %}
+                    <div><span>나의활동</span></div>
+                    {% endif %}
+                </div>
+                <div class="sideBar_second">
+                    <div class="sidBar_second_img"><img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_70.png" alt=""></div>
+                    <div class="sidBar_second_info">
+                        <div style="font-weight: 700;">{{ request.user.username }}</div>
+                        <div style="font-weight: 300;">가입:<span>{{ user.date_joined|date:"Y-m-d" }}
+                        </span></div>
+                    </div>
+                </div>
+                <div class="sideBar_third">
+                    <div>
+                        <div>방문</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    <div>
+                        <div>내가 쓴 글 보기</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    <div>
+                        <div>접속자 수</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <a class="sideBar_third_button" href="{% url 'write' %}">
+                        글쓰기
+                    </a>
+                    {% else %}
+                    <a class="sideBar_third_button" href="{% url 'login' %}">
+                        로그인
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="sideBar_fourth">
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'index' %}">전체게시판</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'free' %}">자유게시판</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'pc' %}">pc 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'moblie' %}">모바일 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'embed' %}">임베디드 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'anti'%}">안티포렌식</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="https://link-base.ms/">딥웹</a></div>
+                </div>
+            </div>
+            <div class="main">
+                <h2>{{ a }}</h1>
+                <div class="main_title">
+                    <div>
+                        <span class="main_totlal">
+                            <em>{{ post_list|length }}</em>
+                           개의 글
+                        </span>
+                    </div>
+                    <div> 
+                        <input type="checkbox" id="notice_hidden">
+                        <label for="notice_hidden">공지 숨기기</label>
+                    </div>
+                </div>
+                <div class="main_article_boarder">
+                    <table class="table_solid_form">
+                        <tr>
+                        <th></th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회</th>
+                        </tr>
+                        <tr class="tr_alarm_for" id="alarm">
+                            <td class="th_type alarm_color make_center"><div class="td_strong">공지</div></td>
+                            <td class="th_title">
+                                <a class="alarm_color" href="{% url 'ItisNotice' %}">카페 규칙 공지입니다</a>
+                            </td>
+                            <td class="th_writer">공지자</td>
+                            <td class="th_date">2022.12.23</td>
+                            <td class="th_lookup">1230</td>
+                        </tr>
+                        {% for post in page_obj %}
+                        <tr>
+                            <td class="th_type">{{ a }}</td>
+                            <td class="th_title">
+                                <a href="{% url 'Boardindex' number=post.pk %}">{{ post.titel }}</a>
+                            </td>
+                            <td class="th_writer">{{ post.name }}</td>
+                            <td class="th_date">{{ post.created_at|date:'H:i'}}</td>
+                            <td class="th_lookup">123</td>
+                        </tr>
+                        {% endfor %}
+                       
+                       
+                    </table>
+                </div>
+                <div class="main_bottom">
+                    {% if page_obj.has_previous %}
+                    <a style="margin-right: 7px;" class="next_page" href="?page={{page_obj.previous_page_number}}"> &#10094 이전 </a>
+                    {% endif %}
+                    {% for page in custom_range %}
+                    {% if page == page_obj.number %}
+                    <a class="number_of_page in_page" href="?page={{ page }}">{{ page }}</a>
+                    {% else %}
+                    <a class="number_of_page" href="?page={{ page }}">{{ page }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <a class="next_page" href="?page={{ page_obj.next_page_number}}">다음 &#10095</a>
+                    {% endif %}
+                </div>
+                <div class="main_search">
+                    <form action="#">
+                        <input placeholder="검색어를 입력해주세요" id="search_id"type="text" required>
+                        <input type="submit" value="검색">
+                    </form>
+                </div>
+            
+            </div>
+           
+        </div>
+    
+    </div>
+    <script src="{% static 'js/infor.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lookup_style.css' %}">
+    <title>Document</title>
+    <style>
+        .reply-container {
+            margin-left: 20px;
+        }
+
+        .reply {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .comment-form,
+        .reply-form {
+            margin-top: 10px;
+        }
+
+        .comment-form textarea,
+        .reply-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .comment-form button,
+        .reply-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .reply-form {
+            display: none;
+        }
+     .comments-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .comment {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .comment-text {
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .comment-date {
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .delete-comment {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .delete-comment:hover {
+            color: #f00;
+        }
+
+        .comment-form {
+            margin-top: 20px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .comment-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="bigBody">
+        <div class="header">
+            <div class="header_first_child"> 
+                <div>치트엔진 대피소</div>
+                <div>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">로그아웃</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">로그인</a>
+                    <span>|</span>
+                    <a href="{% url 'sign' %}">회원가입</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header_second_child"> 
+                <img class="header_img" src="{% static 'img/1.png' %}" alt="">
+            </div>
+        </div>
+        <div class="sideAndMain">
+            <div class="sideBar">
+                <div class="sideBar_first">
+                    <div><a href="{% url 'ItisNotice' %}">카페정보</a></div>
+                    <div><span><a href="{% url 'docterlist' name=request.user.username %}">나의활동</a></span></div>
+                </div>
+                <div class="sideBar_second">
+                    <div class="sidBar_second_img"><img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_70.png" alt=""></div>
+                    <div class="sidBar_second_info">
+                        <div style="font-weight: 700;">{{ request.user.username }}</div>
+                        <div style="font-weight: 300;">가입:<span>{{ user.date_joined|date:"Y-m-d" }}
+                        </span></div>
+                    </div>
+                </div>
+                <div class="sideBar_third">
+                    <div>
+                        <div>방문</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    <div>
+                        <div>내가 쓴 글 보기</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    <div>
+                        <div>접속자 수</div>
+                        <div><span>비활성</span></div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <a class="sideBar_third_button" href="{% url 'write' %}">
+                        글쓰기
+                    </a>
+                    {% else %}
+                    <a class="sideBar_third_button" href="{% url 'login' %}">
+                        로그인
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="sideBar_fourth">
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'index' %}">전체게시판</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'free' %}">자유게시판</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'pc' %}">pc 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'moblie' %}">모바일 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'embed' %}">임베디드 게임</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="{% url 'anti'%}">안티포렌식</a></div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                      </svg><a href="https://link-base.ms/">딥웹</a></div>
+                </div>
+               
+            </div>
+            <div class="lookup_main">
+                <div class="lookup_title">
+                    <h4>게시판</h4>
+                    <h2>{{ board.title }}</h1>
+                    <div class="lookup_info">
+                        <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_70.png" alt="">
+                        <div>
+                            <div class="lookup_name">
+                                <div>{{ board.name }}</div>
+                                <a href="#">쪽지 보내기</a>
+                            </div>
+                            <div>
+                                <span>{{ board.created_at }}</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lookup_content">
+                   <!-- lookup.html -->
+
+                 {{ board.board_text|safe }}
+                
+                </div>
+                <div class="lookup_content_bottom">
+                    <a href="{% url 'docterlist' name=board.name %}"> 
+                        <span>{{ board.name }}</span>님의 게시글 더보기>
+                    </a>
+                    <div class="love_comment">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                          </svg>
+                        댓글<span>{{ comment|length }}</span>
+                    </div>
+                </div>
+                <h2>댓글</h2>
+                <div class="comment"> 
+                    <div class="comment_input">
+                        <div  style="margin-bottom:15px;">
+                            {{ request.user.username }}
+                        </div>
+                        <form action="{% url 'Boardindex' number=board.id %}" method="post">
+                            {% csrf_token %}
+                        <textarea name="cm" id="comment" cols="30" rows="6" placeholder="댓글을 남겨보세요" onkeyup="fn_checkByte(this)"></textarea>
+                        <input style="margin-right: 15px;" type="submit">
+                        (<span id="nowByte">0</span>/3000bytes)
+                    </form>
+                    </div>
+                </div>
+                {% for text in comment %}
+                <div class="comment" onclick="toggleReplyForm(this)">
+                    {% if text.user == username or user.is_staff  %}
+                    <a href="{% url 'comment_remove' pk=text.pk %}">
+                        <span class="delete-comment">Delete</span> 
+                    </a>
+                    {% endif %}
+                    <div class="comment-author">{{ text.user }}</div>
+                    <div class="comment-text">{{ text.comment }}</div>
+                    <div class="comment-date">{{ text.created_at }}</div>
+                    <!-- 대댓글 -->
+                    {% for reply in text.replies.all %}
+                    <div class="reply-container">
+                        <div class="reply">
+                            <div class="comment-author">{{ reply.user }}</div>
+                            <div class="comment-text">{{ reply.comment }}</div>
+                            <div class="comment-date">{{ reply.created_at }}</div>
+                            {% if reply.user == username or user.is_staff  %}
+                            <a href="{% url 'comment_remove' pk=reply.pk %}">
+                                <div class="comment-date">Delete</div> 
+                            </a>
+                            {% endif %}
+                             
+                        </div>
+                    </div>
+                    {% endfor %}
+                     <!-- 대댓글 폼 -->
+                     <div class="reply-form">
+                        <form action="{% url 'Boardindex' number=board.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="parent_comment_id" value="{{ text.pk }}">
+                            <textarea  name="relcm" placeholder="Leave a reply..."></textarea>
+                            <button type="submit">Post Reply</button>
+                        </form>
+                    </div>
+                
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    
+    </div>
+    <script src="{% static 'js/lookup_comment.js' %}"></script>
+    <script>
+        function toggleReplyForm(comment) {
+            var replyForm = comment.querySelector('.reply-form');
+            replyForm.style.display = 'block';
+
+        }
+    </script>
+    
+</body>
+</html>
+

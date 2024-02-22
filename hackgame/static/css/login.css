@@ -1,0 +1,71 @@
+.login_main {
+  width: 861px;
+  height: 420px;
+  margin-top: 50px;
+  border: 1px solid #f2f2f2;
+  border-radius: 12px;
+  margin-top: 56px;
+  margin-bottom: 100px;
+}
+
+.login_field {
+  border: 1px solid #222;
+  width: 431px;
+  height: 228px;
+  border-radius: 6px;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  margin-top: 60px;
+  margin-left: 185px;
+  margin-right: 185px;
+}
+
+.login_field div {
+  border: 1px solid #222;
+  border-radius: 6px;
+  width: 360px;
+  height: 10px;
+  padding: 20px 35px 20px 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.login_field div:hover {
+  border: solid 1px #03c75a;
+}
+.login_field div input {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 318px;
+  height: 20px;
+  border: 0px;
+}
+.login_input {
+  margin-top: 40px;
+  width: 432px;
+  height: 50px;
+  border-radius: 6px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #03c75a;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.passwordAndIdAndSign {
+  margin-top: 20px;
+  width: 861px;
+  display: flex;
+  justify-content: center;
+}
+
+.passwordAndIdAndSign span {
+  margin: 0px 20px 0px 20px;
+}
+
+.login_advertise {
+  width: 861px;
+  height: 200px;
+  background-color: #03c75a;
+}

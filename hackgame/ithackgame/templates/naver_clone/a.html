@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/write.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="bigBody">
+        <div class="header">
+            <div class="header_first_child"> 
+                <div>치트엔진 대피소</div>
+                <div>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">로그아웃</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">로그인</a>
+                    <span>|</span>
+                    <a href="{% url 'sign' %}">회원가입</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header_second_child"> 
+                <img class="header_img" src="{% static 'img/1.png' %}" alt="">
+            </div>
+        </div>
+        <h1>카페 글쓰기</h1>
+        <div class="write_main">
+            <form action="{% url 'write' %}" class="write_main_titleAndContent" method="post">
+                {{ form.media }}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="등록하기">
+            </form>
+
+        </div>
+    </div>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,281 @@
+input:focus,
+select:focus,
+option:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+body {
+  font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum,
+    sans-serif;
+}
+a {
+  color: black;
+  text-decoration-line: none;
+}
+a:hover {
+  text-decoration-line: underline;
+}
+.hidden {
+  display: none;
+}
+.bigBody {
+  margin-left: 302px;
+  margin-right: 302px;
+  width: 1300px;
+  height: 100%;
+}
+.header {
+  width: 1080px;
+  height: 200px;
+  margin-bottom: 22px;
+}
+.header_first_child {
+  height: 33px;
+  width: 1080px;
+  display: flex;
+  justify-content: space-between;
+}
+.header_img {
+  width: 1080px;
+  height: 200px;
+  border-radius: 30px;
+}
+.sideAndMain {
+  display: flex;
+}
+.sideBar {
+  width: 200px;
+  margin-right: 22px;
+}
+
+.main {
+  width: 861px;
+}
+
+.main_title {
+  width: 861px;
+  height: 46px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-top: 6px;
+  position: relative;
+}
+.main_totlal {
+  position: absolute;
+  top: 18px;
+}
+.main_title div:nth-child(2) {
+  width: 118px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+}
+
+.main_article_boarder {
+  border-top: solid;
+}
+
+.main_article_boarder th:nth-child(1) {
+  width: 90px;
+  height: 42px;
+}
+
+.main_article_boarder th:nth-child(2) {
+  width: 515px;
+}
+
+.main_article_boarder th:nth-child(3) {
+  width: 118px;
+  text-align: left;
+}
+
+.main_article_boarder th:nth-child(4) {
+  width: 80px;
+}
+
+.main_article_boarder th:nth-child(5) {
+  width: 68px;
+}
+
+.th_type {
+  width: 90px;
+  height: 42px;
+  text-align: center;
+}
+
+.th_title {
+  padding-left: 12px;
+  width: 515px;
+}
+
+.th_writer {
+  width: 118px;
+}
+
+.th_date {
+  width: 80px;
+  text-align: center;
+}
+
+.th_lookup {
+  width: 68px;
+  text-align: center;
+}
+
+.table_solid_form {
+  border-collapse: collapse;
+}
+
+.main_article_boarder tr {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.tr_alarm_for {
+  background-color: #f2f2f2;
+}
+.alarm_color {
+  color: #ff4e59;
+}
+.td_strong {
+  border-radius: 10%;
+  width: 56px;
+  height: 20px;
+  background-color: #ffe3e4;
+  border: 1px solid #ffc6c9;
+}
+.make_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_bottom {
+  height: 54px;
+  width: 861px;
+  background-color: #f9f9f9;
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number_of_page {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.in_page {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: rgb(134, 199, 37);
+  background-color: white;
+}
+
+.next_page {
+  margin-left: 15px;
+}
+
+.advertise_bottom {
+  width: 856px;
+  height: 369px;
+  background-color: aqua;
+  margin-top: 30px;
+}
+
+.sideBar_first {
+  border-top: solid;
+  width: 200px;
+  height: 38px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-around;
+}
+
+.sideBar_second {
+  border-top: #f9f9f9;
+  width: 200px;
+  height: 77px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sideBar_third {
+  width: 200px;
+  height: 111px;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+.sideBar_third div:nth-child(n) {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.sideBar_third_button {
+  margin-top: 10px;
+  width: 200px;
+  height: 35px;
+  background-color: #5a5a5a;
+  display: block;
+  text-align: center;
+  line-height: 35px;
+  color: white;
+}
+
+.sideBar_fourth {
+  border-top: solid;
+  border-bottom: 1px solid #f2f2f2;
+  padding-bottom: 5px;
+  width: 200px;
+}
+
+.sideBar_fourth div:nth-child(n) {
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 7px;
+}
+
+.sideBar_fourth div a:nth-child(n) {
+  margin-left: 10px;
+}
+
+.sidbar_advertise {
+  width: 200px;
+  height: 500px;
+  background-color: aquamarine;
+}
+.left-advertise {
+  margin-left: 15px;
+  width: 200px;
+  height: 700px;
+  background-color: antiquewhite;
+}
+
+.main_search form {
+  height: 74px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px #f2f2f2;
+  width: 861px;
+}
+
+.main_search form input:nth-child(1) {
+  width: 201px;
+  height: 34px;
+  border: 0px;
+  padding: 0px;
+  border-color: antiquewhite;
+}
+.main_search form input:nth-child(2) {
+  width: 56px;
+  height: 36px;
+  background-color: #03c75a;
+  border: 0px;
+}
